@@ -854,3 +854,30 @@ class Application(Gtk.Application):
         with open("/path/to/logs.txt", "r") as log_file:
             return log_file.read()
 
+    def on_log_menu_activate(self, widget):
+        # Открытие окна с логами
+        self.show_log_window()
+    
+    def show_log_window(self):
+        # Логика для отображения окна с логами
+        pass
+
+    def handle_sso(self):
+        # Логика для обработки SSO
+        # Например, использование библиотеки requests для получения токена
+        import requests
+        response = requests.post('https://sso.example.com/token', data={
+            'grant_type': 'authorization_code',
+            'code': 'your_code_here',
+            'redirect_uri': 'your_redirect_uri',
+            'client_id': 'your_client_id',
+            'client_secret': 'your_client_secret'
+        })
+        token = response.json().get('access_token')
+        # Используйте токен для аутентификации
+        pass
+
+    def log_session(self, message):
+        with open('session_logs.txt', 'a') as log_file:
+            log_file.write(f"{message}\n")
+
