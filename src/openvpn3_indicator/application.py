@@ -182,6 +182,8 @@ class Application(Gtk.Application):
         GLib.timeout_add(1000, self.on_schedule)
         self.hold()
 
+        self.create_menu()
+
     def refresh_ui(self):
         if self.invalid_ui:
             new_indicators = dict()
