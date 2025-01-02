@@ -823,7 +823,15 @@ class Application(Gtk.Application):
         logs_menu_item.connect("activate", self.on_logs_menu_item_activate)
         self.menu.append(logs_menu_item)
 
-        # Добавьте другие пункты меню, если необходимо
+        # Добавление других пунктов меню
+        about_menu_item = Gtk.MenuItem.new_with_label(gettext.gettext('About'))
+        about_menu_item.connect('activate', self.action_about)
+        self.menu.append(about_menu_item)
+
+        quit_menu_item = Gtk.MenuItem.new_with_label(gettext.gettext('Quit'))
+        quit_menu_item.connect('activate', self.action_quit)
+        self.menu.append(quit_menu_item)
+
         self.menu.show_all()
 
     def on_logs_menu_item_activate(self, widget):
