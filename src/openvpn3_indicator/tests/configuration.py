@@ -40,6 +40,10 @@ class Test(Gtk.Application):
     def action_quit(self, *args, **kwargs):
         self.release()
 
+    def configure_openvpn(self):
+        self.setenv("CLIENT_CERT", "0")
+        self.setenv("UV_SSO_AUTH", "1")
+
 if __name__ == '__main__':
     logging.basicConfig(level = logging.DEBUG)
     test = Test()

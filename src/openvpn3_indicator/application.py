@@ -514,7 +514,7 @@ class Application(Gtk.Application):
             except: #TODO: Catch only expected exceptions
                 logging.debug(traceback.format_exc())
         if openvpn3.StatusMajor.SESSION == major and openvpn3.StatusMinor.SESS_AUTH_URL == minor:
-            self.action_auth_url(None, session_id, message)
+            self.action_auth_url(session_id, message)
         if openvpn3.StatusMajor.SESSION == major and openvpn3.StatusMinor.PROC_STOPPED == minor:
             pass
         if openvpn3.StatusMajor.CONNECTION == major and openvpn3.StatusMinor.CONN_AUTH_FAILED == minor:
@@ -563,7 +563,8 @@ class Application(Gtk.Application):
                 self.action_session_disconnect(None, session_id)
         self.notify_session_change(session_id)
 
-    def action_auth_url(self, _object, session_id, url):
+    def action_auth_url(self, session_id, url):
+        # Используем URL, предоставленный сервером
         webbrowser.open_new(url)
 
     def store_set_credentials(self, config_id, credentials):
@@ -807,4 +808,31 @@ class Application(Gtk.Application):
         logging.error(msg, *args, **kwargs)
         if notify:
             self.logging_notify(msg, icon='active-error')
+
+    def create_menu(self):
+        # ... существующий код ...
+        logs_menu_item = Gtk.MenuItem(label="Logs")
+        logs_menu_item.connect("activate", self.on_logs_menu_item_activate)
+        self.menu.append(logs_menu_item)
+        # ... существующий код ...
+
+    def on_logs_menu_item_activate(self, widget):
+        # Логика для отображения логов
+        self.show_logs_dialog()
+
+    def authenticate_with_browser(self):
+        # URL для аутентификации
+        auth_url = "https://example.com/auth"
+        webbrowser.open(auth_url)
+
+    def show_logs_dialog(self):
+        # Логика для отображения логов
+        logs = self.read_session_logs()
+        # Отобразите логи в диалоге или окне
+        print(logs)
+
+    def read_session_logs(self):
+        # Пример чтения логов
+        with open("/path/to/logs.txt", "r") as log_file:
+            return log_file.read()
 
