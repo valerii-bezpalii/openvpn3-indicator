@@ -1,5 +1,0 @@
-APPLICATION_ID = "com.example.openvpn3_indicator"
-APPLICATION_VERSION = "1.0"
-APPLICATION_NAME = "OpenVPN3 Indicator"
-APPLICATION_TITLE = "OpenVPN3 Indicator"
-APPLICATION_SYSTEM_TAG = "openvpn3" 
