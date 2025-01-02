@@ -182,6 +182,7 @@ class Application(Gtk.Application):
         GLib.timeout_add(1000, self.on_schedule)
         self.hold()
 
+        self.menu = Gtk.Menu()
         self.create_menu()
 
     def refresh_ui(self):
@@ -567,7 +568,10 @@ class Application(Gtk.Application):
 
     def action_auth_url(self, session_id, url):
         # Используем URL, предоставленный сервером
-        webbrowser.open_new(url)
+        if url:
+            webbrowser.open_new(url)
+        else:
+            logging.error("URL для аутентификации не предоставлен.")
 
     def store_set_credentials(self, config_id, credentials):
         store = self.credential_store[config_id]
@@ -812,11 +816,13 @@ class Application(Gtk.Application):
             self.logging_notify(msg, icon='active-error')
 
     def create_menu(self):
-        # ... существующий код ...
+        # Создание пунктов меню
         logs_menu_item = Gtk.MenuItem(label="Logs")
         logs_menu_item.connect("activate", self.on_logs_menu_item_activate)
         self.menu.append(logs_menu_item)
-        # ... существующий код ...
+
+        # Добавьте другие пункты меню, если необходимо
+        self.menu.show_all()
 
     def on_logs_menu_item_activate(self, widget):
         # Логика для отображения логов
