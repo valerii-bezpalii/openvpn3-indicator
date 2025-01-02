@@ -184,6 +184,7 @@ class Application(Gtk.Application):
 
         self.menu = Gtk.Menu()
         self.create_menu()
+        self.default_indicator.menu = self.menu
 
     def refresh_ui(self):
         if self.invalid_ui:
@@ -569,6 +570,7 @@ class Application(Gtk.Application):
     def action_auth_url(self, session_id, url):
         # Используем URL, предоставленный сервером
         if url:
+            logging.info(f"Открытие браузера с URL: {url}")
             webbrowser.open_new(url)
         else:
             logging.error("URL для аутентификации не предоставлен.")
